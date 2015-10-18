@@ -1,0 +1,21 @@
+web:
+    image: node:0.12
+    command: bash -c "cd /app && npm install && npm start"
+    volumes:
+     - ./app:/app
+    links:
+     - mongodb:mongodb
+    ports:
+     - "3000:3000"
+    #environment:
+    # - MONGO_ENV_VAR=SOMETHING
+    #env_file:
+    # - docker_envfile
+     
+mongodb:
+    image: mongo:2.6
+    command: --smallfiles
+    volumes:
+     - ./volumes/mongo/data:/data/db
+    ports:
+     - "27027:27017"
